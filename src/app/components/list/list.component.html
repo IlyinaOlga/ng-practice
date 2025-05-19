@@ -1,1 +1,41 @@
-<p>product-list works!</p>
+<div *ngIf="users">
+  <h1>GitHub users</h1>
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Find user</mat-label>
+      <input
+        matInput
+        placeholder="Name"
+        name="searchField"
+        #myInput
+        (keyup)="onKeyUp(myInput.value)"
+      />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </form>
+
+  <div class="container">
+    <div *ngFor="let item of users">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{ item?.login }}</mat-card-title>
+          <mat-card-subtitle>
+            <a
+              [href]="item?.subscriptions_url"
+              target="_blank"
+              class="multiline-ellipsis"
+              >{{ item?.subscriptions_url }}</a
+            >
+          </mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="item?.avatar_url" alt="avatar" />
+        <mat-card-content>
+          <div>
+            repository
+            <a [href]="item?.html_url" target="_blank">{{ item?.html_url }}</a>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

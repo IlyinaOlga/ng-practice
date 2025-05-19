@@ -1,0 +1,45 @@
+.container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  gap: 16px;
+  row-gap: 20px;
+  margin: 0 -16px;
+}
+
+.container > div {
+  width: 100%;
+}
+
+mat-card-content {
+  margin-top: 16px;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(0, 92, 187);
+}
+
+mat-card {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+mat-card img[mat-card-image] {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.multiline-ellipsis {
+  width: 200px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+mat-form-field {
+  width: 100%;
+}

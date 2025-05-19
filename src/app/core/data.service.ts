@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { User } from '../components/list/list.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,12 @@ export class DataService {
 
   constructor(private http: HttpClient) {}
 
-   getUser(username: string) {
+  getUsers() {
+   const url = `${this.apiUrl}/users`;
+   return this.http.get<User[]>(url, { headers: this.getHeaders() });
+  }
+
+  getUser(username: string) {
     const url = `${this.apiUrl}/users/${username}`;
     return this.http.get(url, { headers: this.getHeaders() });
   }
