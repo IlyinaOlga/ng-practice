@@ -1,18 +1,13 @@
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <mat-label>Find user</mat-label>
+    <input matInput placeholder="Enter name" #myInput />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+</form>
+
 <div *ngIf="users">
   <h1>GitHub users</h1>
-  <form class="example-form">
-    <mat-form-field class="example-full-width">
-      <mat-label>Find user</mat-label>
-      <input
-        matInput
-        placeholder="Name"
-        name="searchField"
-        #myInput
-        (keyup)="onKeyUp(myInput.value)"
-      />
-      <mat-icon matSuffix>search</mat-icon>
-    </mat-form-field>
-  </form>
 
   <div class="container">
     <div *ngFor="let item of users">

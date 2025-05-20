@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { DataService } from '../../core/data.service';
 import { User } from './list.interface';
+import { debounce, fromEvent, interval, map, Subscription, timer } from 'rxjs';
 
 @Component({
   selector: 'list',
@@ -8,9 +9,12 @@ import { User } from './list.interface';
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
 })
+
 export class ListComponent {
+  @ViewChild('myInput') inputRef!: ElementRef<HTMLInputElement>;
   users: User[] | null = null;
-  inputValue: string = '';
+  subscription!: Subscription;
+  searchTerm: string = '';
 
   constructor(private dataService: DataService) {}
 
@@ -20,7 +24,19 @@ export class ListComponent {
     });
   }
 
-  onKeyUp(value: string) {
-    console.log('Значение input:', value);
+  ngAfterViewInit(): void {
+    this.subscription = fromEvent(this.inputRef.nativeElement, 'keyup').pipe(
+      debounce(() => interval(500)),
+      map((event: any) => event.target.value)
+    )
+      .subscribe((value: any) => {
+        console.log(value, 123);
+
+      });
+
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }
